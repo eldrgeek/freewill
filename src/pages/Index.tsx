@@ -7,8 +7,8 @@ const Index = () => {
   const defaultBlogUrl = "https://70yearswtf.substack.com/p/click-if-youve-got-free-will";
 
   useEffect(() => {
-    // Capture referrer on first load if not already stored
-    if (!sessionStorage.getItem("blogReferrer") && document.referrer) {
+    // Capture referrer on first load if not already stored and if it's external
+    if (!sessionStorage.getItem("blogReferrer") && document.referrer && !document.referrer.includes(window.location.host)) {
       sessionStorage.setItem("blogReferrer", document.referrer);
     }
   }, []);
