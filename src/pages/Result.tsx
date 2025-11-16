@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 const resultMessages = {
   obedient: {
@@ -54,6 +55,13 @@ const Result = () => {
   const { type } = useParams<{ type: string }>();
   const result = resultMessages[type as keyof typeof resultMessages] || resultMessages.obedient;
   const defaultBlogUrl = "https://70yearswtf.substack.com/p/click-if-youve-got-free-will";
+
+  useEffect(() => {
+    // Capture referrer on first load if not already stored and if it's external
+    if (!sessionStorage.getItem("blogReferrer") && document.referrer && !document.referrer.includes(window.location.host)) {
+      sessionStorage.setItem("blogReferrer", document.referrer);
+    }
+  }, []);
 
   const getBlogUrl = () => {
     return sessionStorage.getItem("blogReferrer") || defaultBlogUrl;
