@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useReturnUrl } from "@/hooks/useReturnUrl";
 
 const resultMessages = {
   obedient: {
@@ -55,17 +55,7 @@ const Result = () => {
   const { type } = useParams<{ type: string }>();
   const result = resultMessages[type as keyof typeof resultMessages] || resultMessages.obedient;
   const defaultBlogUrl = "https://70yearswtf.substack.com/p/click-if-youve-got-free-will";
-
-  useEffect(() => {
-    // Capture referrer on first load if not already stored and if it's external
-    if (!localStorage.getItem("blogReferrer") && document.referrer && !document.referrer.includes(window.location.host)) {
-      localStorage.setItem("blogReferrer", document.referrer);
-    }
-  }, []);
-
-  const getBlogUrl = () => {
-    return localStorage.getItem("blogReferrer") || defaultBlogUrl;
-  };
+  const returnUrl = useReturnUrl(defaultBlogUrl);
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
@@ -101,7 +91,7 @@ const Result = () => {
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Button 
+              <Button
                 size="lg"
                 className="text-xl py-6 font-black uppercase hover:scale-105 transition-transform"
                 onClick={() => navigate("/")}
@@ -109,11 +99,11 @@ const Result = () => {
                 Try Again (You Won't)
               </Button>
               
-              <Button 
+              <Button
                 size="lg"
                 variant="secondary"
                 className="text-xl py-6 font-black uppercase hover:scale-105 transition-transform"
-                onClick={() => window.open(getBlogUrl(), "_blank")}
+                onClick={() => window.open(returnUrl, "_blank")}
               >
                 Back to Blog
               </Button>
