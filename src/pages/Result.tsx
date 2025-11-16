@@ -53,6 +53,11 @@ const Result = () => {
   const navigate = useNavigate();
   const { type } = useParams<{ type: string }>();
   const result = resultMessages[type as keyof typeof resultMessages] || resultMessages.obedient;
+  const defaultBlogUrl = "https://70yearswtf.substack.com/p/click-if-youve-got-free-will";
+
+  const getBlogUrl = () => {
+    return sessionStorage.getItem("blogReferrer") || defaultBlogUrl;
+  };
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
@@ -100,7 +105,7 @@ const Result = () => {
                 size="lg"
                 variant="secondary"
                 className="text-xl py-6 font-black uppercase hover:scale-105 transition-transform"
-                onClick={() => window.open("https://substack.com", "_blank")}
+                onClick={() => window.open(getBlogUrl(), "_blank")}
               >
                 Back to Blog
               </Button>
