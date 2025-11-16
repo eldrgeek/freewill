@@ -1,21 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useReturnUrl } from "@/hooks/useReturnUrl";
 
 const Index = () => {
   const navigate = useNavigate();
   const defaultBlogUrl = "https://70yearswtf.substack.com/p/click-if-youve-got-free-will";
-
-  useEffect(() => {
-    // Capture referrer on first load if not already stored and if it's external
-    if (!localStorage.getItem("blogReferrer") && document.referrer && !document.referrer.includes(window.location.host)) {
-      localStorage.setItem("blogReferrer", document.referrer);
-    }
-  }, []);
-
-  const getBlogUrl = () => {
-    return localStorage.getItem("blogReferrer") || defaultBlogUrl;
-  };
+  const { returnToReferrer } = useReturnUrl(defaultBlogUrl);
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
@@ -97,14 +87,13 @@ const Index = () => {
         </div>
 
         <div className="mt-8">
-          <a 
-            href={getBlogUrl()} 
-            className="text-foreground underline hover:no-underline font-bold text-lg"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Button
+            variant="link"
+            className="text-foreground font-bold text-lg"
+            onClick={returnToReferrer}
           >
             ← Back to the blog that controls your actions
-          </a>
+          </Button>
         </div>
       </div>
     </div>
