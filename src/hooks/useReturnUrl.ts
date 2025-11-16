@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const STORAGE_KEY = "blogReferrer";
 
@@ -28,5 +28,13 @@ export const useReturnUrl = (defaultUrl: string) => {
     }
   }, [defaultUrl]);
 
-  return returnUrl;
+  const returnToReferrer = useCallback(() => {
+    window.close();
+
+    window.setTimeout(() => {
+      window.location.assign(returnUrl);
+    }, 200);
+  }, [returnUrl]);
+
+  return { returnUrl, returnToReferrer };
 };

@@ -5,7 +5,7 @@ import { useReturnUrl } from "@/hooks/useReturnUrl";
 const Index = () => {
   const navigate = useNavigate();
   const defaultBlogUrl = "https://70yearswtf.substack.com/p/click-if-youve-got-free-will";
-  const returnUrl = useReturnUrl(defaultBlogUrl);
+  const { returnToReferrer } = useReturnUrl(defaultBlogUrl);
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
@@ -87,14 +87,13 @@ const Index = () => {
         </div>
 
         <div className="mt-8">
-          <a
-            href={returnUrl}
-            className="text-foreground underline hover:no-underline font-bold text-lg"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Button
+            variant="link"
+            className="text-foreground font-bold text-lg"
+            onClick={returnToReferrer}
           >
             ← Back to the blog that controls your actions
-          </a>
+          </Button>
         </div>
       </div>
     </div>
