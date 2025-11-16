@@ -35,7 +35,7 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
             <Button 
               size="lg" 
-              className="text-xl py-8 font-black uppercase hover:scale-105 transition-transform"
+              className="text-lg py-8 font-black uppercase hover:scale-105 transition-transform whitespace-normal h-auto"
               onClick={() => navigate("/result/obedient")}
             >
               Click this if you DON'T have free will
@@ -44,7 +44,7 @@ const Index = () => {
             <Button 
               size="lg"
               variant="secondary"
-              className="text-xl py-8 font-black uppercase hover:scale-105 transition-transform"
+              className="text-lg py-8 font-black uppercase hover:scale-105 transition-transform whitespace-normal h-auto"
               onClick={() => navigate("/result/rebel")}
             >
               Don't click this if you DO have free will
@@ -52,7 +52,7 @@ const Index = () => {
             
             <Button 
               size="lg"
-              className="text-xl py-8 font-black uppercase hover:scale-105 transition-transform"
+              className="text-lg py-8 font-black uppercase hover:scale-105 transition-transform whitespace-normal h-auto"
               onClick={() => navigate("/result/paradox")}
             >
               Click here to prove free will exists
@@ -61,7 +61,7 @@ const Index = () => {
             <Button 
               size="lg"
               variant="secondary"
-              className="text-xl py-8 font-black uppercase hover:scale-105 transition-transform"
+              className="text-lg py-8 font-black uppercase hover:scale-105 transition-transform whitespace-normal h-auto"
               onClick={() => navigate("/result/confused")}
             >
               I'm confused, what do I click?
@@ -71,7 +71,7 @@ const Index = () => {
           <div className="mt-12 space-y-4">
             <Button 
               size="lg"
-              className="text-xl py-8 font-black uppercase w-full hover:scale-105 transition-transform"
+              className="text-lg py-8 font-black uppercase w-full hover:scale-105 transition-transform whitespace-normal h-auto"
               onClick={() => navigate("/result/exit")}
             >
               CLICK HERE TO LEAVE
