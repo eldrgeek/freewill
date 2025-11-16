@@ -8,13 +8,13 @@ const Index = () => {
 
   useEffect(() => {
     // Capture referrer on first load if not already stored and if it's external
-    if (!sessionStorage.getItem("blogReferrer") && document.referrer && !document.referrer.includes(window.location.host)) {
-      sessionStorage.setItem("blogReferrer", document.referrer);
+    if (!localStorage.getItem("blogReferrer") && document.referrer && !document.referrer.includes(window.location.host)) {
+      localStorage.setItem("blogReferrer", document.referrer);
     }
   }, []);
 
   const getBlogUrl = () => {
-    return sessionStorage.getItem("blogReferrer") || defaultBlogUrl;
+    return localStorage.getItem("blogReferrer") || defaultBlogUrl;
   };
 
   return (
